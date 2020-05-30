@@ -1,0 +1,77 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: study-egg
+  namespace: $NAMESPACE
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: study-egg
+    spec:
+      containers:
+      - name: study-egg
+        image: registry.jianke.com/library/study-egg:$IMAGE_TAG
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: EGG_WORKERS
+          value: 4
+        - name: CLOUD_CONFIG_SERVER 
+          value: 
+        - name: CLOUD_CONFIG_PROFILE
+          value: "dev"
+        - name: CLOUD_CONFIG_USER
+          value: "root"
+        - name: CLOUD_CONFIG_PASSWORD
+          value: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: study-egg
+  namespace: $NAMESPACE
+  labels:
+    run: study-egg
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    name: http
+  selector:
+    run: study-egg
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: study-egg
+  namespace: $NAMESPACE
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+spec:
+  rules:
+  - host: study-egg.dev.jianke.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: study-egg
+          servicePort: 8080

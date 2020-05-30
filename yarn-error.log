@@ -1,0 +1,104 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;E:\tools\k8s;E:\gradle-4.6\bin;E:\apache-maven-3.5.3\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;E:\tools\curl-7.59.0-win64-mingw\bin;%NVM_HOME%;%NVM_SYMLINK%;E:\Git\cmd;F:\webSoft\bin;;F:\webSoft\Microsoft VS Code Insiders\bin;F:\webSoft\nvm;C:\Program Files\nodejs
+
+Yarn version: 
+  1.19.1
+
+Node version: 
+  10.15.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.npm.taobao.org/jk-ui-env: Not found
+      at Request.params.callback [as _callback] (F:\webSoft\nvm\v10.15.3\node_modules\yarn\lib\cli.js:66926:18)
+      at Request.self.callback (F:\webSoft\nvm\v10.15.3\node_modules\yarn\lib\cli.js:140564:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (F:\webSoft\nvm\v10.15.3\node_modules\yarn\lib\cli.js:141536:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (F:\webSoft\nvm\v10.15.3\node_modules\yarn\lib\cli.js:141458:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1125:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+npm manifest: 
+  {
+    "name": "km-api",
+    "version": "1.0.1",
+    "description": "大健知识库",
+    "private": true,
+    "egg": {
+      "typescript": true,
+      "declarations": true
+    },
+    "scripts": {
+      "start": "egg-scripts start --title=egg-server-km-api --port=8080",
+      "stop": "egg-scripts stop --title=egg-server-km-api",
+      "dev": "cross-env CLOUD_CONFIG_SERVER=http://config-server.dev.jianke.com CLOUD_CONFIG_PROFILE=dev CLOUD_CONFIG_USER=root CLOUD_CONFIG_PASSWORD=password egg-bin dev",
+      "debug": "cross-env CLOUD_CONFIG_SERVER=http://config-server.dev.jianke.com CLOUD_CONFIG_PROFILE=dev CLOUD_CONFIG_USER=root CLOUD_CONFIG_PASSWORD=password egg-bin debug",
+      "test-local": "cross-env CLOUD_CONFIG_SERVER=http://config-server.dev.jianke.com CLOUD_CONFIG_PROFILE=dev CLOUD_CONFIG_USER=root CLOUD_CONFIG_PASSWORD=password egg-bin test",
+      "test": "npm run lint -- --fix && npm run test-local",
+      "cov": "egg-bin cov",
+      "tsc": "ets && tsc -p tsconfig.json",
+      "ci": "npm run lint && npm run cov && npm run tsc",
+      "autod": "autod",
+      "lint": "tslint --project . -c tslint.json",
+      "lint:fix": "tslint --project . -c tslint.json --fix",
+      "clean": "ets clean",
+      "build": "npm run clean && npm run lint && npm run tsc"
+    },
+    "dependencies": {
+      "@alicloud/opentracing": "^0.1.1",
+      "cross-env": "^6.0.3",
+      "egg": "^2.26.0",
+      "egg-alinode": "^2.0.1",
+      "egg-mongoose": "^3.2.0",
+      "egg-redis": "^2.4.0",
+      "egg-scripts": "^2.12.0",
+      "egg-security": "^2.7.1",
+      "egg-validate": "^2.0.2",
+      "jk-ui-env": "^3.0.9",
+      "moment": "^2.24.0",
+      "querystring": "^0.2.0"
+    },
+    "devDependencies": {
+      "@types/mocha": "^5.2.7",
+      "@types/node": "^12.12.18",
+      "@types/supertest": "^2.0.8",
+      "autod": "^3.1.0",
+      "autod-egg": "^1.1.0",
+      "egg-bin": "^4.14.0",
+      "egg-ci": "^1.13.1",
+      "egg-mock": "^3.25.0",
+      "tslib": "^1.10.0",
+      "tslint": "^5.20.1",
+      "tslint-config-egg": "^1.0.0",
+      "typescript": "^3.7.3"
+    },
+    "engines": {
+      "node": ">=8.9.0"
+    },
+    "ci": {
+      "version": "8"
+    },
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
+    "eslintIgnore": [
+      "coverage"
+    ],
+    "author": "fe-team@jianke.com",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
